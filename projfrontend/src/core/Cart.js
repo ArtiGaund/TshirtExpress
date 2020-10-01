@@ -13,18 +13,20 @@ const Cart = () => {
 
     const loadAllProducts = (products) =>{
         return(
-            <div>
-                {products.map((product, index) => (
+            <div className='row' >
+             {products.map((product, index) => (
+                 <div className='col-4' >
                     <Card
                     key={index}
                     product={product}
                     removeFromCart={true}
                     addtoCart={false}
                     reload={reload}
-                    setReload={setReload}
-                    />
+                    setReload={setReload}/>
+                    </div>
+            
                 ))}
-            </div>
+                </div>
         );
     };
     const loadCheckOut = () => {
@@ -36,11 +38,10 @@ const Cart = () => {
     };
     return(
         <Base title="Cart Page" description="Welcome to checkout">
-            <div className="row text-center">
-                <div className="col-6">
-                    {loadAllProducts(products)}
-                </div>
-                <div className="col-6">
+            <div>
+                {loadAllProducts(products)}
+            <div className='row'>
+                <div className="col-12">
                     {products.length >0 ?
                     (
                         <PaymentB products={products} setReload={setReload}/> 
@@ -48,9 +49,9 @@ const Cart = () => {
                     (
                         <h3>Please login or add something in cart</h3>
                     ) }
-                    {/* {loadCheckOut()} */}
                 </div>
-            </div>
+                </div>
+                </div>
         </Base>
     );
 };

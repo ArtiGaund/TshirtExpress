@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import Base from '../core/Base';
 import { Link, Redirect } from "react-router-dom";
 import {signin, authenticate, isAuthenticated} from '../auth/helper';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 const Signin = () =>{
 
     const [values, setValues] = useState({
         name: "",
-        email: "two@gmail.com",
-        password: "12345",
+        email: "",
+        password: "",
         error: "",
         success: false,
         loading: false,
@@ -36,6 +39,7 @@ const Signin = () =>{
                         didRedirect: true,
                     });
                 });
+                toast.success("Login Success");
             }
             else
             {
@@ -43,6 +47,7 @@ const Signin = () =>{
                     ...values,
                     loading: false,
                 });
+                toast.error("Please enter correct data");
             }
         })
         .catch((e)=>console.log(e));
@@ -63,61 +68,24 @@ const Signin = () =>{
             )
         );
     };
-
-    const successMessage = () =>{
-        return(
-            <div className="row">
-                <div className="col-md-6 offset-sm-3 text-left">
-                    <div 
-                    className="alert alert-success"
-                    style={{display:success?"":"none"}}
-                    >
-                        New account created successfully. Please
-                        <Link to="/signin"> login now!</Link>
-
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
-    const errorMessage = () => {
-        return (
-            <div className="row">
-                <div className="col-md-6 offset-sm-3 text-left">
-                    <div
-                        className="alert alert-danger"
-                        style={{ display: error ? "" : "none" }}
-                    >
-                        Check all fields again.
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     const signInForm = () =>{
         return(
             <div className="row">
                 <div className="col-md-6 offset-sm-3 text-left">
-                    <form>
-                        <div className="form-group">
-                            <label className="text-light">Email</label>
+                    <form class="text-center border border-light p-5 bg-white jumbotron ">
                             <input
-                                className="form-control"
+                                class="form-control mb-4"
                                 value={email}
                                 onChange={handleChange("email")}
-                                type="text" />
-                        </div>
-                        <div className="form-group">
-                            <label className="text-light">Password</label>
+                                type="text"
+                                placeholder="Enter email" />
                             <input
-                                className="form-control"
+                                class="form-control"
                                 value={password}
                                 onChange={handleChange("password")}
-                                type="password" />
-                        </div>
-                        <button className="btn btn-success btn-block"  onClick={onSubmit}>Submit</button>
+                                type="password" 
+                                placeholder="Enter password"/>
+                        <button class="btn btn-info my-4 btn-block"  onClick={onSubmit}>Submit</button>
                     </form>
                 </div>
             </div>
@@ -126,11 +94,10 @@ const Signin = () =>{
 
     
     return(
-        <Base title="Welcome to Signin Page" description="A Tshirt store">
+        <Base title="Welcome to Signin Page" description="">
             {loadingMessage()}
             {signInForm()}
             <p className="text-center">
-        {JSON.stringify(values)}
       </p>
       {performRedirect()}
         </Base>

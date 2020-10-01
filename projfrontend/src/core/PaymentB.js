@@ -4,6 +4,8 @@ import { cartEmpty } from "./helper/cartHelper";
 import { getmeToken, processPayment } from "./helper/paymentHelper";
 import { createOrder } from "./helper/orderHelper";
 import { isAuthenticated, signout } from "../auth/helper";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import DropIn from "braintree-web-drop-in-react";
 
@@ -68,6 +70,7 @@ const PaymentB = ({
           if (response.error) {
             if (response.code == "1") {
               console.log("PAYMENT Failed!");
+              toast.error("PAYMENT FAILED!");
               signout(() => {
                 return <Redirect to="/" />;
               });
@@ -75,7 +78,7 @@ const PaymentB = ({
           } else {
             setInfo({ ...info, success: response.success, loading: false });
             console.log("PAYMENT SUCCESS");
-
+            toast.success("PAYMENT SUCCESS!");
             let product_names = "";
             products.forEach(function (item) {
               product_names += item.name + ", ";
@@ -91,6 +94,7 @@ const PaymentB = ({
                 if (response.error) {
                   if (response.code == "1") {
                     console.log("Order Failed!");
+                    toast.error("ORDER FAILED!");
                     signout(() => {
                       return <Redirect to="/" />;
                     });
@@ -98,6 +102,7 @@ const PaymentB = ({
                 } else {
                   if (response.success == true) {
                     console.log("ORDER PLACED!!");
+                    toast.success("ORDER PLACED!");
                   }
                 }
               })
@@ -147,7 +152,9 @@ const PaymentB = ({
 
   return (
     <div>
+      <div style={{margin:'2rem'}}> 
       <h3>Your bill is $ {getAmount()}</h3>
+      </div>
       {showbtnDropIn()}
     </div>
   );

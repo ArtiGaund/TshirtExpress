@@ -3,6 +3,9 @@ import ImageHelper from "./helper/ImageHepler";
 import {Redirect} from 'react-router-dom';
 import { addItemToCart, removeItemFromCart } from './helper/cartHelper';
 import { isAuthenticated } from '../auth/helper';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 
 const Card = ({
     product,
@@ -20,11 +23,41 @@ const Card = ({
         if (isAuthenticated())
         {
             addItemToCart(product, () => setRedirect(true));
+            toast.success('Product added into the card');
             console.log("Added to cart");
         }
         else{
+            toast.error('Login Please');
             console.log("Login Please!");
         }
+    };
+
+    const successMessage = () =>{
+        return(
+            <div className="row">
+                <div className="col-md-6 offset-sm-3 text-left">
+                    <div 
+                    className="alert alert-success"
+                    >
+                       Product is added to your card!
+
+                    </div>
+                </div>
+            </div>
+        );
+    };
+    const errorMessage = () => {
+        return (
+            <div className="row">
+                <div className="col-md-6 offset-sm-3 text-left">
+                    <div
+                        className="alert alert-danger"
+                    >
+                        Please Login First
+                    </div>
+                </div>
+            </div>
+        );
     };
 
     const getAredirect = (redirect) =>{
@@ -38,7 +71,7 @@ const Card = ({
             addtoCart && (
                 <button
                     onClick={addToCart}
-                    className="btn btn-block btn-outline-success mt-2 mb-2"
+                    class="btn btn-primary"
                 >
                     Add to Cart
                 </button>
@@ -55,8 +88,9 @@ const Card = ({
                        removeItemFromCart(product._id);
                        setReload(!reload);
                          console.log("Product Removed from cart")
+                         toast.warning("Product Removed from the cart");
                      }}
-                    className="btn btn-block btn-outline-danger mt-2 mb-2"
+                    className="btn btn-danger"
                 >
                     Remove from cart
                 </button>
@@ -65,25 +99,22 @@ const Card = ({
    };
 
     return (
-        <div className="card text-white bg-dark border border-info ">
-          <div className="card-header lead">{cartTitle}</div>
-          <div className="card-body">
-              {getAredirect(redirect)}
-            <ImageHelper product={product}/>
-            <p className="lead bg-success font-weight-normal text-wrap">
-             {cartDescription}
-            </p>
-    <p className="btn btn-success rounded  btn-sm px-4">$ {cartPrice}</p>
-            <div className="row">
-              <div className="col-12">
-                  {showAddToCart(addToCart)}
-              </div>
-              <div className="col-12">
-                {showRemoveFromCart(removeFromCart)}
-              </div>
-            </div>
-          </div>
-        </div>
+                <div class="card">
+                    <ImageHelper product={product}/>
+                    <div class="card-body text-center">
+                    <h2 class="card-text"><b><a>{cartTitle}</a></b></h2>
+                    <p class="card-text"> {cartDescription}</p>
+                    <p class="card-text">Cost is Rs. {cartPrice}</p>
+                    </div>
+                    <div className="row">
+                    <div className="col-12" style={{marginLeft:'6rem'}}>
+                            {showAddToCart(addToCart)}
+                    </div>
+                    <div className="col-12" style={{marginLeft:'8rem'}}>
+                        {showRemoveFromCart(removeFromCart)}
+                    </div>
+                    </div>
+                </div>
       );
     };
 export default Card;

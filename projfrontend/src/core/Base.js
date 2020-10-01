@@ -4,29 +4,24 @@ import Menu from './Menu';
 const Base = ({
     title = "My Title",
     description = "My description",
-    className = "bg-dark text-white p-4",
+    className = "text-white p-4",
     children
 }) => {
     return(
-        <div>
+        <div class="special-color pt-4" style={{position:"absolute",padding:'0',width:'100%',height:'100%'}}>
             <Menu/>
-            <div className="container-fluid">
-            <div className="jumbotron bg-dark text-white text-center">
-                    <h2 className="display-4">{title}</h2>
+            <div class="special-color pt-4" style={{marginBottom:'2rem'}}>
+            <div className="jumbotron text-white text-center special-color pt-4">
+                    <h2 className="display-5">{title}</h2>
                     <p className="lead">{description}</p>
                 </div>
                 <div className={className}>{children}</div>
             </div>
-            <footer className="footer bg-dark mt-auto py-3">
-                <div className="container-fluid bg-success text-white text-center py-3">
-                    <h4>If you have any questions, react me out on instragram</h4>
-                    <button className="btn btn-warning btn-lg">Contact Us</button>
-                    <div className="container">
-                        <span className="text-warning">
-                            An amazing django react fullstack course.
-                        </span>
+
+            <footer class="page-footer font-small special-color-dark" style={{position:'fixed',bottom:'0',left:'0',right:'0'}}>
+                    <div class="footer-copyright text-center py-3">© TshirtExpress:
+                        <a href=""> tshirtExpress@shop.com</a>
                     </div>
-                </div>
             </footer>
         </div>
     );

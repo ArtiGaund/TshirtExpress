@@ -16,3 +16,11 @@ export const createOrder = (userId, token, orderData) => {
     })
     .catch((err) => console.log(err));
 };
+
+export const getOrder = () => {
+  return fetch(`${API}order/`, {method: 'GET'})
+  .then( response => {
+      return response.json();
+  })
+  .catch(err => console.log(err));
+};

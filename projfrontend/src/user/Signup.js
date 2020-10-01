@@ -2,7 +2,9 @@ import React,{useState} from 'react';
 import Base from '../core/Base';
 import {Link} from "react-router-dom";
 import {signup} from '../auth/helper';
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
 const Signup = () =>{
 
     const [values, setValues] =useState({
@@ -82,34 +84,31 @@ const Signup = () =>{
 
     const signUpForm = () =>{
         return(
-            <div className="row">
+            <div class="row">
                 <div className="col-md-6 offset-sm-3 text-left">
-                    <form>
-                        <div className="form-group">
-                            <label className="text-light">Name</label>
+                    <form class="text-center border border-light p-5 bg-white jumbotron ">
                             <input
-                            className="form-control"
+                            class="form-control mb-4"
                             value={name}
                             onChange={handleChange("name")}
+                            placeholder="Enter name"
                             type="text"/>
-                        </div>
-                        <div className="form-group">
-                            <label className="text-light">Email</label>
                             <input
-                                className="form-control"
+                                class="form-control mb-4"
                                 value={email}
                                 onChange={handleChange("email")}
-                                type="text" />
-                        </div>
-                        <div className="form-group">
-                            <label className="text-light">Password</label>
+                                placeholder="Enter email"
+                                type="email" />
                             <input
-                                className="form-control"
+                                class="form-control mb-4"
                                 value={password}
                                 onChange={handleChange("password")}
-                                type="password" />
-                        </div>
-                        <button className="btn btn-success btn-block"  onClick={onSubmit}>Submit</button>
+                                type="password" 
+                                placeholder="Enter Password"/>
+                            <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+                                At least 8 characters and 1 digit
+                            </small>
+                        <button class="btn btn-info my-4 btn-block"  onClick={onSubmit}>Submit</button>
                     </form>
                 </div>
             </div>
@@ -117,13 +116,10 @@ const Signup = () =>{
     };
 
     return(
-        <Base title="Sign Up Page" description="A signup for LCO user">
+        <Base title="Welcome to SignUp Page" description="">
             {errorMessage()}
             {successMessage()}
             {signUpForm()}
-            <p className="text-white text-center">
-                {JSON.stringify(values)}
-            </p>
         </Base>
     );
 }

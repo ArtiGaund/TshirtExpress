@@ -6,6 +6,7 @@ import Signin from "./user/Signin";
 import Cart from './core/Cart';
 import PrivateRoutes from "./auth/helper/PrivateRouters";
 import UserDashboard from "./user/UserDashBoard";
+import Profile from "./user/Profile";
 const Routes = () =>{
     return(
         <BrowserRouter>

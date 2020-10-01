@@ -4,6 +4,6 @@ from .models import Order
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Order
-        fields = ('user')
+        fields = ('product_name','total_product','transaction_id','total_amount')
 
         #Todo add product and quantity
