@@ -25,7 +25,8 @@ SECRET_KEY = 'j$b@c4fm%&2gn!_f#7_3o6@9ae1!$9lcd-vb%c+3*xvg6z$&n2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['your-backend-service.onrender.com', 'localhost']
+# filepath: e:\Projects\TshirtExpress\ecom\ecom\settings.py
+ALLOWED_HOSTS = ['tshirtexpress.onrender.com', 'localhost']
 
 
 # Application definition
