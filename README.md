@@ -32,7 +32,37 @@ TshirtExpress is a scalable e-commerce platform that allows users to:
 ---
 
 ## Project Structure
+The project is organized into two main parts: the backend and the frontend. 
 
+TshirtExpress/
+├── ecom/                # Backend (Django)
+│   ├── manage.py
+│   ├── db.sqlite3
+│   ├── api/             # API modules
+│   │   ├── category/
+│   │   ├── order/
+│   │   ├── payment/
+│   │   ├── product/
+│   │   ├── user/
+│   │   ├── models.py
+│   │   ├── views.py
+│   │   ├── urls.py
+│   │   └── ...
+│   ├── ecom/            # Django project settings
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── ...
+│   └── media/           # Media files
+├── projfrontend/        # Frontend (React)
+│   ├── public/
+│   │   ├── index.html
+│   │   └── ...
+│   ├── src/
+│   │   ├── core/        # Core components
+│   │   ├── user/        # User-related components
+│   │   ├── index.js
+│   │   └── ...
+└── README.md
 
 
 ---
@@ -126,4 +156,3 @@ Deployment
     ```npm run build```
     2. Serve the build/ folder using a static file server or integrate it with the backend.
 
-    
