@@ -16,6 +16,9 @@
     "react-scripts": "3.4.3",
     "react-toastify": "^6.0.8"
   },
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "start": "react-scripts --openssl-legacy-provider start",
     "build": "react-scripts build",
